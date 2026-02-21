@@ -1,4 +1,4 @@
-{ lib, stdenv, cmake, autoPatchelfHook }:
+{ lib, stdenv, cmake, autoPatchelfHook, src ? ./.. }:
 
 let
   ortArch = if stdenv.hostPlatform.isAarch64 then "aarch64" else "x86_64";
@@ -7,7 +7,7 @@ stdenv.mkDerivation {
   pname = "moonshine";
   version = "0.0.48";
 
-  src = ./..;
+  inherit src;
 
   nativeBuildInputs = [ cmake autoPatchelfHook ];
   buildInputs = [ stdenv.cc.cc.lib ];

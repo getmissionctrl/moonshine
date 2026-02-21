@@ -13,7 +13,15 @@
       packages = forAllSystems (system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
-          moonshine = pkgs.callPackage ./nix/package.nix { };
+          # Use fetchgit with lfs=true to properly fetch Git LFS files
+          # (model .ort files, speaker-embedding-model-data.cpp)
+          src = pkgs.fetchgit {
+            url = "https://github.com/getmissionctrl/moonshine";
+            rev = "a735e244a2a47f9b9d7ea750acaf819bd4326754";
+            hash = "sha256-5FqOJydch9e+IIA5KIvRm/RwzunwYEMhCeQ+uMf6Lro=";
+            fetchLFS = true;
+          };
+          moonshine = pkgs.callPackage ./nix/package.nix { inherit src; };
           moonshine-cli = pkgs.callPackage ./nix/cli.nix { inherit moonshine; };
         in {
           default = moonshine-cli;
@@ -30,7 +38,14 @@
       );
 
       overlays.default = final: prev: {
-        moonshine = final.callPackage ./nix/package.nix { };
+        moonshine = final.callPackage ./nix/package.nix {
+          src = final.fetchgit {
+            url = "https://github.com/getmissionctrl/moonshine";
+            rev = "a735e244a2a47f9b9d7ea750acaf819bd4326754";
+            hash = "sha256-5FqOJydch9e+IIA5KIvRm/RwzunwYEMhCeQ+uMf6Lro=";
+            fetchLFS = true;
+          };
+        };
         moonshine-cli = final.callPackage ./nix/cli.nix {
           moonshine = final.moonshine;
         };
