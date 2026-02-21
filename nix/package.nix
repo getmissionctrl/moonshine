@@ -41,6 +41,7 @@ stdenv.mkDerivation {
     install -m644 ../core/moonshine-cpp.h $out/include/
 
     cp -r ../test-assets/tiny-en $out/share/moonshine/models/
+    cp -r ../examples/android/Transcriber/app/src/main/assets/base-en $out/share/moonshine/models/
 
     runHook postInstall
   '';
