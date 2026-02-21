@@ -17,8 +17,8 @@
           # (model .ort files, speaker-embedding-model-data.cpp)
           src = pkgs.fetchgit {
             url = "https://github.com/getmissionctrl/moonshine";
-            rev = "a735e244a2a47f9b9d7ea750acaf819bd4326754";
-            hash = "sha256-5FqOJydch9e+IIA5KIvRm/RwzunwYEMhCeQ+uMf6Lro=";
+            rev = "f94dcf3e4be242b9897a77c2f42662be7a984607";
+            hash = "sha256-7USAO3I6J/FiAbFLZxe6/4i+kIuyypiLeYA3Comrv6Q=";
             fetchLFS = true;
           };
           moonshine = pkgs.callPackage ./nix/package.nix { inherit src; };
@@ -41,8 +41,8 @@
         moonshine = final.callPackage ./nix/package.nix {
           src = final.fetchgit {
             url = "https://github.com/getmissionctrl/moonshine";
-            rev = "a735e244a2a47f9b9d7ea750acaf819bd4326754";
-            hash = "sha256-5FqOJydch9e+IIA5KIvRm/RwzunwYEMhCeQ+uMf6Lro=";
+            rev = "f94dcf3e4be242b9897a77c2f42662be7a984607";
+            hash = "sha256-7USAO3I6J/FiAbFLZxe6/4i+kIuyypiLeYA3Comrv6Q=";
             fetchLFS = true;
           };
         };
